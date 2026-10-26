@@ -1,0 +1,956 @@
+
+/* =====================================================
+   SMARTFINDER — MAIN STYLESHEET
+   Digunakan bersama oleh index, Cari Partner, Ajakan Belajar
+   ===================================================== */
+
+
+/* 1. VARIABLES / WARNA UTAMA
+   ===================================================== */
+
+:root {
+    --primary: #6c4be8;
+    --primary-dark: #5032c4;
+    --primary-light: #f1edff;
+
+    --secondary: #8a70f0;
+    --ink: #20213a;
+    --text: #55566f;
+    --muted: #77788e;
+
+    --white: #ffffff;
+    --page-bg: #faf9ff;
+    --border: #e9e7f2;
+
+    --success: #16845b;
+    --success-bg: #e9f8f0;
+    --warning: #a56514;
+    --warning-bg: #fff2df;
+    --danger: #d7475c;
+
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+
+    --shadow-sm: 0 5px 18px rgba(38, 27, 80, 0.05);
+    --shadow-md: 0 14px 36px rgba(38, 27, 80, 0.08);
+    --shadow-lg: 0 22px 55px rgba(38, 27, 80, 0.12);
+
+    --container-width: 1120px;
+}
+
+
+/* 2. RESET DAN DASAR HALAMAN
+   ===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--page-bg);
+    font-family: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+    margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--ink);
+    line-height: 1.25;
+}
+
+p {
+    color: var(--text);
+}
+
+::selection {
+    color: var(--white);
+    background: var(--primary);
+}
+
+:focus-visible {
+    outline: 3px solid rgba(108, 75, 232, 0.35);
+    outline-offset: 3px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* 3. CONTAINER
+   ===================================================== */
+
+.container {
+    width: min(var(--container-width), 92%);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.section {
+    padding: 75px 0;
+}
+
+.section-heading {
+    max-width: 700px;
+    margin: 0 auto 35px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    margin-bottom: 12px;
+    font-size: clamp(26px, 3vw, 36px);
+    letter-spacing: -1px;
+}
+
+.section-heading p {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* 4. NAVBAR
+   Mendukung .navbar, .nav-container, .logo, .nav-menu
+   ===================================================== */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+}
+
+.nav-container {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    color: var(--ink);
+    font-size: 25px;
+    font-weight: 850;
+    letter-spacing: -1.1px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-menu a {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--primary);
+}
+
+.nav-menu .nav-cta {
+    padding: 11px 17px;
+    color: var(--white);
+    background: var(--primary);
+    border-radius: 11px;
+}
+
+.nav-menu .nav-cta:hover {
+    color: var(--white);
+    background: var(--primary-dark);
+}
+
+
+/* 5. TOMBOL
+   ===================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 45px;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.3;
+    text-align: center;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    color: var(--white);
+    background: var(--primary);
+    box-shadow: 0 5px 14px rgba(108, 75, 232, 0.16);
+}
+
+.btn-primary:hover {
+    color: var(--white);
+    background: var(--primary-dark);
+    box-shadow: 0 8px 20px rgba(108, 75, 232, 0.22);
+}
+
+.btn-outline {
+    color: var(--primary);
+    background: var(--white);
+    border-color: #ded5ff;
+}
+
+.btn-outline:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+}
+
+.btn-light {
+    color: var(--primary-dark);
+    background: var(--white);
+}
+
+.btn-light:hover {
+    color: var(--primary-dark);
+    background: #f5f1ff;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+
+/* 6. HERO BERANDA
+   Mendukung .hero, .hero-label, .hero-content, .hero-actions
+   ===================================================== */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 78px 0;
+    background:
+        radial-gradient(
+            circle at 88% 18%,
+            rgba(205, 190, 255, 0.72),
+            transparent 29%
+        ),
+        linear-gradient(125deg, #f1edff, #faf9ff 68%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 750px;
+}
+
+.hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    color: var(--primary-dark);
+    background: var(--white);
+    border: 1px solid #e5dcff;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 0.6px;
+}
+
+.hero h1 {
+    max-width: 800px;
+    margin: 22px 0 18px;
+    color: var(--ink);
+    font-size: clamp(36px, 5.2vw, 60px);
+    font-weight: 850;
+    line-height: 1.13;
+    letter-spacing: -2px;
+}
+
+.hero h1 span,
+.hero .highlight {
+    color: var(--primary);
+}
+
+.hero p {
+    max-width: 650px;
+    margin-bottom: 26px;
+    color: #6f6d86;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 25px;
+}
+
+.hero-image,
+.hero-visual {
+    border-radius: var(--radius-lg);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 45px;
+}
+
+
+/* 7. STATISTIK
+   ===================================================== */
+
+.stats,
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.stat-card,
+.stat-item {
+    padding: 23px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.stat-card h3,
+.stat-item h3 {
+    margin-bottom: 6px;
+    color: var(--primary);
+    font-size: 30px;
+    font-weight: 850;
+}
+
+.stat-card p,
+.stat-item p {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* 8. KARTU UMUM, BENEFIT, FITUR
+   ===================================================== */
+
+.card,
+.feature-card,
+.benefit-card {
+    min-width: 0;
+    padding: 25px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card:hover,
+.feature-card:hover,
+.benefit-card:hover {
+    transform: translateY(-4px);
+    border-color: #d9ceff;
+    box-shadow: var(--shadow-md);
+}
+
+.card h3,
+.feature-card h3,
+.benefit-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.card p,
+.feature-card p,
+.benefit-card p {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.card-icon,
+.feature-icon,
+.benefit-icon {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 18px;
+    place-items: center;
+    color: var(--primary);
+    background: var(--primary-light);
+    border-radius: 15px;
+    font-size: 22px;
+}
+
+.feature-grid,
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+/* 9. SEARCH PANEL
+   ===================================================== */
+
+.search-section,
+.partners-section {
+    padding: 48px 0;
+}
+
+.search-panel {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr auto;
+    align-items: end;
+    gap: 15px;
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-group,
+.search-field {
+    min-width: 0;
+}
+
+.form-group label,
+.search-field label {
+    display: block;
+    margin-bottom: 9px;
+    color: #494960;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.form-group input,
+.form-group select,
+.search-field input,
+.search-field select {
+    width: 100%;
+    min-width: 0;
+    height: 47px;
+    padding: 0 13px;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.search-field input:focus,
+.search-field select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(108, 75, 232, 0.1);
+}
+
+
+/* 10. KARTU PARTNER VERSI UMUM
+   Halaman Cari Partner terbaru memakai class .sf-card sendiri.
+   ===================================================== */
+
+.partner-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.partner-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: 23px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.partner-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.partner-avatar {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 15px;
+    place-items: center;
+    color: var(--primary-dark);
+    background: var(--primary-light);
+    border-radius: 17px;
+    font-size: 18px;
+    font-weight: 850;
+}
+
+.partner-card h3 {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.partner-class {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.partner-info {
+    margin: 12px 0;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.partner-info p {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.partner-info p:last-child {
+    margin-bottom: 0;
+}
+
+.partner-description {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.status-badge {
+    display: inline-block;
+    width: fit-content;
+    margin-bottom: 12px;
+    padding: 6px 10px;
+    color: var(--success);
+    background: var(--success-bg);
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.status-badge.offline {
+    color: var(--warning);
+    background: var(--warning-bg);
+}
+
+.empty-message {
+    padding: 35px 20px;
+    color: var(--muted);
+    background: var(--white);
+    border: 1px dashed #d9d2ef;
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+
+/* 11. FORM UMUM
+   Halaman Ajakan Belajar terbaru memakai class .ab-* sendiri.
+   ===================================================== */
+
+.form-card {
+    padding: 30px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-section-title {
+    margin-bottom: 25px;
+}
+
+.form-section-title h2 {
+    margin-bottom: 8px;
+    font-size: 22px;
+}
+
+.form-section-title p {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px;
+}
+
+.form-field {
+    min-width: 0;
+}
+
+.form-field.full {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 9px;
+    color: #494960;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    font-size: 13px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-field input,
+.form-field select {
+    min-height: 47px;
+}
+
+.form-field textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(108, 75, 232, 0.1);
+}
+
+.form-hint {
+    display: block;
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.form-divider {
+    margin: 25px 0;
+    border: 0;
+    border-top: 1px solid var(--border);
+}
+
+.form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 20px 0;
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.form-consent input {
+    margin-top: 4px;
+    accent-color: var(--primary);
+}
+
+.form-message {
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.form-message.success {
+    color: #176943;
+    background: var(--success-bg);
+    border: 1px solid #c9ebd7;
+}
+
+.form-message.error {
+    color: #a52c3c;
+    background: #fff0f0;
+    border: 1px solid #f5d0d4;
+}
+
+
+/* 12. CALL TO ACTION
+   ===================================================== */
+
+.cta,
+.cta-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 35px;
+    color: var(--white);
+    background: linear-gradient(120deg, #6041d4, #8065ed);
+    border-radius: var(--radius-lg);
+}
+
+.cta h2,
+.cta-section h2 {
+    margin-bottom: 9px;
+    color: var(--white);
+    font-size: 25px;
+}
+
+.cta p,
+.cta-section p {
+    margin-bottom: 0;
+    color: #eee8ff;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.cta .btn,
+.cta-section .btn {
+    flex-shrink: 0;
+    color: var(--primary-dark);
+    background: var(--white);
+}
+
+
+/* 13. FOOTER
+   ===================================================== */
+
+.footer {
+    padding: 25px 0;
+    color: var(--muted);
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+}
+
+.footer p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* 14. RESPONSIVE TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .search-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .partner-grid,
+    .feature-grid,
+    .benefit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero {
+        padding: 60px 0;
+    }
+
+    .section {
+        padding: 55px 0;
+    }
+}
+
+
+/* 15. RESPONSIVE HP
+   ===================================================== */
+
+@media (max-width: 600px) {
+    .container {
+        width: 91%;
+    }
+
+    .nav-container {
+        min-height: auto;
+        padding: 17px 0;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-menu {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 13px 18px;
+    }
+
+    .nav-menu a {
+        font-size: 12px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .hero {
+        padding: 45px 0;
+    }
+
+    .hero h1 {
+        font-size: clamp(34px, 9vw, 45px);
+        letter-spacing: -1.3px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .stats,
+    .stats-grid,
+    .partner-grid,
+    .feature-grid,
+    .benefit-grid,
+    .search-panel,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-panel {
+        padding: 18px;
+    }
+
+    .form-field.full {
+        grid-column: auto;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+
+    .cta,
+    .cta-section {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 25px;
+    }
+
+    .cta .btn,
+    .cta-section .btn {
+        width: 100%;
+    }
+
+    .section {
+        padding: 45px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 25px;
+    }
+}
+
+
+/* 16. AKSESIBILITAS: KURANGI ANIMASI
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

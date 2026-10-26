@@ -1,0 +1,906 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ajakan Belajar | SmartFinder</title>
+
+    <!-- Menghubungkan CSS eksternal -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+        :root {
+            --purple: #6c4be8;
+            --purple-dark: #5032c4;
+            --purple-light: #f1edff;
+            --ink: #20213a;
+            --muted: #77788e;
+            --border: #e9e7f2;
+            --page: #faf9ff;
+            --green: #16845b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--page);
+            color: var(--ink);
+            font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button, input, select, textarea {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
+        }
+
+        /* NAVBAR */
+        .ab-nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .ab-nav-inner {
+            min-height: 76px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .ab-logo {
+            color: var(--ink);
+            font-size: 24px;
+            font-weight: 850;
+            letter-spacing: -1px;
+        }
+
+        .ab-logo span {
+            color: var(--purple);
+        }
+
+        .ab-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            flex-wrap: wrap;
+        }
+
+        .ab-links a {
+            color: #696980;
+            font-size: 14px;
+            font-weight: 650;
+        }
+
+        .ab-links a:hover,
+        .ab-links a.active {
+            color: var(--purple);
+        }
+
+        /* HERO */
+        .ab-hero {
+            padding: 54px 0;
+            background:
+                radial-gradient(ellipse at 90% 10%, #ded4ff 0, transparent 35%),
+                linear-gradient(125deg, #f2eeff, #faf9ff 68%);
+        }
+
+        .ab-hero-layout {
+            display: grid;
+            grid-template-columns: 1.25fr .75fr;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .ab-eyebrow {
+            display: inline-block;
+            background: white;
+            border: 1px solid #e5dcff;
+            color: var(--purple-dark);
+            padding: 9px 13px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .6px;
+        }
+
+        .ab-hero h1 {
+            margin: 20px 0 15px;
+            font-size: clamp(34px, 4.5vw, 52px);
+            line-height: 1.15;
+            letter-spacing: -1.8px;
+        }
+
+        .ab-hero h1 span {
+            color: var(--purple);
+        }
+
+        .ab-hero p {
+            color: #6f6d86;
+            font-size: 15px;
+            line-height: 1.9;
+            max-width: 570px;
+            margin: 0;
+        }
+
+        .ab-hero-card {
+            padding: 24px;
+            background: white;
+            border: 1px solid #e9e1ff;
+            border-radius: 23px;
+            box-shadow: 0 20px 55px #6044b714;
+        }
+
+        .ab-hero-card h3 {
+            font-size: 16px;
+            margin: 0 0 18px;
+        }
+
+        .ab-benefit {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .ab-benefit-icon {
+            width: 39px;
+            height: 39px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--purple-light);
+            font-size: 18px;
+        }
+
+        .ab-benefit strong {
+            display: block;
+            font-size: 13px;
+            margin: 2px 0 5px;
+        }
+
+        .ab-benefit small {
+            display: block;
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 12px;
+        }
+
+        /* CONTENT */
+        .ab-main {
+            padding: 50px 0 75px;
+        }
+
+        .ab-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(270px, .75fr);
+            align-items: start;
+            gap: 25px;
+        }
+
+        .ab-form-card,
+        .ab-summary-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: 0 12px 40px #30205b07;
+        }
+
+        .ab-form-card {
+            padding: 30px;
+        }
+
+        .ab-section-title {
+            margin-bottom: 25px;
+        }
+
+        .ab-section-title h2 {
+            margin: 0 0 8px;
+            font-size: 23px;
+            letter-spacing: -.6px;
+        }
+
+        .ab-section-title p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .ab-divider {
+            border: 0;
+            border-top: 1px solid var(--border);
+            margin: 25px 0;
+        }
+
+        .ab-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 19px;
+        }
+
+        .ab-field {
+            min-width: 0;
+        }
+
+        .ab-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .ab-field label {
+            display: block;
+            color: #494960;
+            font-size: 12px;
+            font-weight: 750;
+            margin-bottom: 9px;
+        }
+
+        .ab-field label span {
+            color: #e05270;
+        }
+
+        .ab-field input,
+        .ab-field select,
+        .ab-field textarea {
+            width: 100%;
+            border: 1px solid #e5e3ef;
+            border-radius: 12px;
+            background: #fff;
+            color: var(--ink);
+            padding: 13px 14px;
+            outline: none;
+            font-size: 13px;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .ab-field input,
+        .ab-field select {
+            height: 47px;
+        }
+
+        .ab-field textarea {
+            min-height: 110px;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        .ab-field input:focus,
+        .ab-field select:focus,
+        .ab-field textarea:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px #6c4be817;
+        }
+
+        .ab-hint {
+            display: block;
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* METHOD OPTIONS */
+        .ab-method-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .ab-method-option {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 15px;
+            border: 1px solid #e5e3ef;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .ab-method-option:has(input:checked) {
+            background: var(--purple-light);
+            border-color: var(--purple);
+        }
+
+        .ab-method-option input {
+            accent-color: var(--purple);
+        }
+
+        .ab-method-option strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .ab-method-option small {
+            display: block;
+            color: var(--muted);
+            margin-top: 4px;
+            font-size: 11px;
+        }
+
+        .ab-consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 22px 0;
+            color: #66657b;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .ab-consent input {
+            margin-top: 3px;
+            accent-color: var(--purple);
+        }
+
+        .ab-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            min-height: 47px;
+            padding: 13px 18px;
+            border: 0;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 800;
+            transition: .2s;
+        }
+
+        .ab-btn-primary {
+            width: 100%;
+            color: white;
+            background: var(--purple);
+        }
+
+        .ab-btn-primary:hover {
+            background: var(--purple-dark);
+            transform: translateY(-1px);
+        }
+
+        .ab-btn:disabled {
+            opacity: .7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* SUMMARY SIDEBAR */
+        .ab-summary-card {
+            overflow: hidden;
+        }
+
+        .ab-summary-top {
+            padding: 23px;
+            color: white;
+            background: linear-gradient(125deg, #6041d4, #8065ed);
+        }
+
+        .ab-summary-top span {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .8px;
+            color: #e5ddff;
+        }
+
+        .ab-summary-top h3 {
+            margin: 9px 0 7px;
+            font-size: 22px;
+        }
+
+        .ab-summary-top p {
+            margin: 0;
+            color: #eee8ff;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .ab-summary-body {
+            padding: 23px;
+        }
+
+        .ab-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0eef7;
+            font-size: 12px;
+        }
+
+        .ab-summary-row span {
+            color: var(--muted);
+        }
+
+        .ab-summary-row strong {
+            max-width: 60%;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        .ab-summary-tip {
+            padding: 14px;
+            margin-top: 16px;
+            background: #f5f2ff;
+            border-radius: 12px;
+            color: #6047b8;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .ab-privacy {
+            margin-top: 15px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .ab-message {
+            display: none;
+            padding: 14px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .ab-message.success {
+            display: block;
+            background: #e8f8ef;
+            color: #176943;
+            border: 1px solid #c9ebd7;
+        }
+
+        .ab-message.error {
+            display: block;
+            background: #fff0f0;
+            color: #a52c3c;
+            border: 1px solid #f5d0d4;
+        }
+
+        .ab-footer {
+            background: white;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 24px 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        @media (max-width: 850px) {
+            .ab-hero-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .ab-hero-card {
+                max-width: 520px;
+            }
+
+            .ab-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .ab-summary-card {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .ab-nav-inner {
+                padding: 16px 0;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .ab-links {
+                gap: 15px;
+            }
+
+            .ab-links a {
+                font-size: 12px;
+            }
+
+            .ab-hero {
+                padding: 42px 0;
+            }
+
+            .ab-hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .ab-main {
+                padding: 30px 0 50px;
+            }
+
+            .ab-form-card {
+                padding: 20px;
+            }
+
+            .ab-fields,
+            .ab-method-options {
+                grid-template-columns: 1fr;
+            }
+
+            .ab-field.full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="ab-nav">
+        <div class="container ab-nav-inner">
+            <a href="../index.html" class="ab-logo">
+                Smart<span>Finder.</span>
+            </a>
+
+            <nav class="ab-links" aria-label="Navigasi utama">
+                <a href="../index.html">Beranda</a>
+                <a href="cari-partner.html">Cari Partner</a>
+                <a href="ajakan-belajar.html" class="active">Ajakan Belajar</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="ab-hero">
+        <div class="container ab-hero-layout">
+            <div>
+                <span class="ab-eyebrow">✦ MULAI BELAJAR BERSAMA</span>
+
+                <h1>
+                    Satu Ajakan,<br>
+                    <span>Banyak Kesempatan</span>
+                    untuk Belajar.
+                </h1>
+
+                <p>
+                    Sudah menemukan partner yang cocok? Atur rencana belajar
+                    bersama dengan mengisi formulir berikut. Tentukan pelajaran,
+                    metode, dan jadwal yang sesuai untuk kalian.
+                </p>
+            </div>
+
+            <div class="ab-hero-card">
+                <h3>✨ Rencanakan sesi belajarmu</h3>
+
+                <div class="ab-benefit">
+                    <div class="ab-benefit-icon">📚</div>
+                    <div>
+                        <strong>Tentukan tujuan</strong>
+                        <small>Pilih mata pelajaran dan materi yang ingin dipelajari.</small>
+                    </div>
+                </div>
+
+                <div class="ab-benefit">
+                    <div class="ab-benefit-icon">🗓️</div>
+                    <div>
+                        <strong>Atur jadwal bersama</strong>
+                        <small>Tentukan tanggal dan waktu yang cocok untuk kedua pihak.</small>
+                    </div>
+                </div>
+
+                <div class="ab-benefit">
+                    <div class="ab-benefit-icon">🤝</div>
+                    <div>
+                        <strong>Belajar lebih terarah</strong>
+                        <small>Mulai dengan rencana belajar yang jelas dan terstruktur.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM -->
+    <main class="ab-main">
+        <div class="container">
+            <div class="ab-layout">
+
+                <section class="ab-form-card">
+                    <div class="ab-section-title">
+                        <h2>Buat Ajakan Belajar</h2>
+                        <p>Isi informasi berikut dengan lengkap. Kolom bertanda * wajib diisi.</p>
+                    </div>
+
+                    <div id="formMessage" class="ab-message" role="status"
+                        aria-live="polite"></div>
+
+                    <form id="studyForm">
+                        <div class="ab-section-title">
+                            <h2 style="font-size:16px;">01. Informasi diri</h2>
+                            <p>Masukkan informasi dasar untuk rencana belajar.</p>
+                        </div>
+
+                        <div class="ab-fields">
+                            <div class="ab-field">
+                                <label for="studentName">Nama kamu <span>*</span></label>
+                                <input type="text" id="studentName" name="studentName"
+                                    placeholder="Masukkan nama" required maxlength="80">
+                            </div>
+
+                            <div class="ab-field">
+                                <label for="partnerName">Nama partner <span>*</span></label>
+                                <input type="text" id="partnerName" name="partnerName"
+                                    placeholder="Nama partner tujuan" required maxlength="80">
+                            </div>
+
+                            <div class="ab-field full">
+                                <label for="email">Email kamu <span>*</span></label>
+                                <input type="email" id="email" name="email"
+                                    placeholder="nama@email.com" required maxlength="120">
+                                <small class="ab-hint">
+                                    Gunakan email yang bisa kamu akses. Jangan masukkan kata sandi.
+                                </small>
+                            </div>
+                        </div>
+
+                        <hr class="ab-divider">
+
+                        <div class="ab-section-title">
+                            <h2 style="font-size:16px;">02. Rencana belajar</h2>
+                            <p>Tentukan materi dan cara belajar yang kamu inginkan.</p>
+                        </div>
+
+                        <div class="ab-fields">
+                            <div class="ab-field">
+                                <label for="subject">Mata pelajaran <span>*</span></label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Pilih pelajaran</option>
+                                    <option>Matematika</option>
+                                    <option>Bahasa Inggris</option>
+                                    <option>Fisika</option>
+                                    <option>Biologi</option>
+                                    <option>Sejarah</option>
+                                    <option>Kimia</option>
+                                    <option>Bahasa Indonesia</option>
+                                    <option>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <div class="ab-field">
+                                <label for="topic">Materi yang dipelajari</label>
+                                <input type="text" id="topic" name="topic"
+                                    placeholder="Contoh: Persamaan kuadrat" maxlength="120">
+                            </div>
+
+                            <div class="ab-field full">
+                                <label>Metode belajar <span>*</span></label>
+
+                                <div class="ab-method-options">
+                                    <label class="ab-method-option">
+                                        <input type="radio" name="method" value="Online" required>
+                                        <span>
+                                            <strong>💻 Online</strong>
+                                            <small>Belajar melalui internet</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="ab-method-option">
+                                        <input type="radio" name="method" value="Offline" required>
+                                        <span>
+                                            <strong>📍 Offline</strong>
+                                            <small>Bertemu di tempat umum yang aman</small>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="ab-field">
+                                <label for="studyDate">Tanggal belajar <span>*</span></label>
+                                <input type="date" id="studyDate" name="studyDate" required>
+                            </div>
+
+                            <div class="ab-field">
+                                <label for="studyTime">Waktu belajar <span>*</span></label>
+                                <input type="time" id="studyTime" name="studyTime" required>
+                            </div>
+
+                            <div class="ab-field full" id="locationField" hidden>
+                                <label for="location">Tempat pertemuan</label>
+                                <input type="text" id="location" name="location"
+                                    placeholder="Contoh: perpustakaan umum"
+                                    maxlength="150">
+                                <small class="ab-hint">
+                                    Pilih tempat umum yang aman dan beri tahu orang tua atau wali.
+                                    Jangan cantumkan alamat rumah pribadi.
+                                </small>
+                            </div>
+
+                            <div class="ab-field full">
+                                <label for="message">Pesan untuk partner</label>
+                                <textarea id="message" name="message"
+                                    placeholder="Ceritakan rencana belajar atau materi yang ingin dibahas..."
+                                    maxlength="600"></textarea>
+                                <small class="ab-hint">
+                                    <span id="charCount">0</span>/600 karakter
+                                </small>
+                            </div>
+                        </div>
+
+                        <label class="ab-consent">
+                            <input type="checkbox" id="agreement" required>
+                            <span>
+                                Saya sudah memeriksa informasi yang diisi dan akan
+                                menghormati waktu serta kesepakatan partner belajar.
+                            </span>
+                        </label>
+
+                        <button type="submit" class="ab-btn ab-btn-primary">
+                            Buat Ajakan Belajar <span>↗</span>
+                        </button>
+
+                        <p class="ab-privacy">
+                            Demo formulir: informasi tidak dikirim ke server atau disimpan
+                            secara permanen oleh halaman ini.
+                        </p>
+                    </form>
+                </section>
+
+                <!-- RINGKASAN -->
+                <aside class="ab-summary-card">
+                    <div class="ab-summary-top">
+                        <span>RINGKASAN RENCANA</span>
+                        <h3>Belajar bersama yuk!</h3>
+                        <p>Ringkasan akan berubah otomatis saat kamu mengisi formulir.</p>
+                    </div>
+
+                    <div class="ab-summary-body">
+                        <div class="ab-summary-row">
+                            <span>Nama kamu</span>
+                            <strong id="summaryStudent">Belum diisi</strong>
+                        </div>
+
+                        <div class="ab-summary-row">
+                            <span>Partner</span>
+                            <strong id="summaryPartner">Belum dipilih</strong>
+                        </div>
+
+                        <div class="ab-summary-row">
+                            <span>Pelajaran</span>
+                            <strong id="summarySubject">Belum dipilih</strong>
+                        </div>
+
+                        <div class="ab-summary-row">
+                            <span>Metode</span>
+                            <strong id="summaryMethod">Belum dipilih</strong>
+                        </div>
+
+                        <div class="ab-summary-row">
+                            <span>Tanggal</span>
+                            <strong id="summaryDate">Belum ditentukan</strong>
+                        </div>
+
+                        <div class="ab-summary-row">
+                            <span>Waktu</span>
+                            <strong id="summaryTime">Belum ditentukan</strong>
+                        </div>
+
+                        <div class="ab-summary-tip">
+                            💡 <strong>Tips belajar:</strong> Siapkan pertanyaan
+                            dan materi sebelum sesi dimulai agar waktu belajar
+                            lebih efektif.
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="ab-footer">
+        <div class="container">
+            © 2026 SmartFinder — Temukan partner, tumbuh bersama.
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById("studyForm");
+        const messageBox = document.getElementById("formMessage");
+
+        const studentName = document.getElementById("studentName");
+        const partnerName = document.getElementById("partnerName");
+        const subject = document.getElementById("subject");
+        const studyDate = document.getElementById("studyDate");
+        const studyTime = document.getElementById("studyTime");
+        const locationField = document.getElementById("locationField");
+        const locationInput = document.getElementById("location");
+        const messageInput = document.getElementById("message");
+
+        // Batasi tanggal agar tidak memilih hari yang sudah lewat.
+        const today = new Date();
+        const localToday = [
+            today.getFullYear(),
+            String(today.getMonth() + 1).padStart(2, "0"),
+            String(today.getDate()).padStart(2, "0")
+        ].join("-");
+
+        studyDate.min = localToday;
+
+        // Isi nama partner jika halaman dibuka dari kartu Cari Partner.
+        const params = new URLSearchParams(window.location.search);
+        const partnerFromUrl = params.get("partner");
+
+        if (partnerFromUrl) {
+            partnerName.value = partnerFromUrl.slice(0, 80);
+        }
+
+        function selectedMethod() {
+            const selected = document.querySelector('input[name="method"]:checked');
+            return selected ? selected.value : "";
+        }
+
+        function setSummary(id, value, fallback) {
+            document.getElementById(id).textContent = value || fallback;
+        }
+
+        function updateSummary() {
+            setSummary("summaryStudent", studentName.value.trim(), "Belum diisi");
+            setSummary("summaryPartner", partnerName.value.trim(), "Belum dipilih");
+            setSummary("summarySubject", subject.value, "Belum dipilih");
+            setSummary("summaryMethod", selectedMethod(), "Belum dipilih");
+
+            if (studyDate.value) {
+                const date = new Date(studyDate.value + "T00:00:00");
+                setSummary(
+                    "summaryDate",
+                    date.toLocaleDateString("id-ID", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    }),
+                    "Belum ditentukan"
+                );
+            } else {
+                setSummary("summaryDate", "", "Belum ditentukan");
+            }
+
+            setSummary("summaryTime", studyTime.value, "Belum ditentukan");
+        }
+
+        function updateMethodFields() {
+            const offline = selectedMethod() === "Offline";
+            locationField.hidden = !offline;
+            locationInput.required = offline;
+        }
+
+        form.addEventListener("input", updateSummary);
+        form.addEventListener("change", () => {
+            updateSummary();
+            updateMethodFields();
+        });
+
+        messageInput.addEventListener("input", () => {
+            document.getElementById("charCount").textContent =
+                messageInput.value.length;
+        });
+
+        updateMethodFields();
+        updateSummary();
+    </script>
+
+<script src="../js/validasi.js"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>

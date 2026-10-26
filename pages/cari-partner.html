@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Partner | SmartFinder</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+        :root {
+            --primary: #635bff;
+            --primary-dark: #4940df;
+            --secondary: #8b5cf6;
+            --text: #202747;
+            --muted: #77809b;
+            --background: #f7f8ff;
+            --white: #ffffff;
+            --border: #e8eaf5;
+            --shadow: 0 12px 35px rgba(52, 54, 110, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav-inner {
+            width: min(1120px, 90%);
+            min-height: 76px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            color: var(--primary);
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .brand span {
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+
+        .nav-links a {
+            color: #626b86;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links .nav-cta {
+            color: white;
+            background: var(--primary);
+            padding: 11px 17px;
+            border-radius: 11px;
+        }
+
+        .nav-links .nav-cta:hover {
+            color: white;
+            background: var(--primary-dark);
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(130deg, #ededff, #f7f5ff 55%, #e9f4ff);
+            padding: 66px 20px 88px;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            width: 250px;
+            height: 250px;
+            background: rgba(139, 92, 246, 0.09);
+            top: -100px;
+            right: 8%;
+        }
+
+        .hero::after {
+            width: 180px;
+            height: 180px;
+            background: rgba(99, 91, 255, 0.08);
+            bottom: -100px;
+            left: 5%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 30px;
+            color: var(--primary-dark);
+            background: white;
+            border: 1px solid #e4e1ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.15;
+            letter-spacing: -1.8px;
+            margin: 0 auto 18px;
+            max-width: 750px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            max-width: 580px;
+            margin: auto;
+            color: #68718d;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* MAIN CONTENT */
+        .main-container {
+            width: min(1120px, 90%);
+            margin: -38px auto 70px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* FILTER PANEL */
+        .filter-panel {
+            background: white;
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .filter-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .filter-heading h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .filter-heading p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr auto;
+            gap: 12px;
+        }
+
+        .field {
+            min-width: 0;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #525c78;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            height: 47px;
+            padding: 0 13px;
+            border: 1px solid #e0e4f1;
+            border-radius: 10px;
+            color: var(--text);
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.12);
+        }
+
+        .search-wrap {
+            position: relative;
+        }
+
+        .search-wrap input {
+            padding-left: 40px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 13px;
+            top: 12px;
+            font-size: 17px;
+            pointer-events: none;
+        }
+
+        .reset-button {
+            align-self: end;
+            height: 47px;
+            padding: 0 18px;
+            border: 1px solid #dedfff;
+            border-radius: 10px;
+            background: #f1f0ff;
+            color: var(--primary-dark);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .reset-button:hover {
+            background: #e4e2ff;
+            transform: translateY(-1px);
+        }
+
+        /* RESULTS */
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 35px 0 20px;
+        }
+
+        .results-header h2 {
+            margin: 0 0 5px;
+            font-size: 23px;
+            letter-spacing: -0.5px;
+        }
+
+        .results-header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .result-badge {
+            background: #e9e8ff;
+            color: var(--primary-dark);
+            padding: 9px 13px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .partner-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            background: white;
+            padding: 23px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 5px 18px rgba(52, 54, 110, 0.035);
+            transition: transform 0.25s, box-shadow 0.25s,
+                        border-color 0.25s;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: #d8d5ff;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 18px;
+        }
+
+        .avatar {
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            color: white;
+            font-size: 21px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #756bff, #a17aff);
+        }
+
+        .avatar.blue {
+            background: linear-gradient(135deg, #4099f5, #65c9ed);
+        }
+
+        .avatar.pink {
+            background: linear-gradient(135deg, #f06fae, #ff9dba);
+        }
+
+        .avatar.green {
+            background: linear-gradient(135deg, #21b69b, #6bd8b0);
+        }
+
+        .avatar.orange {
+            background: linear-gradient(135deg, #f39a46, #ffca73);
+        }
+
+        .avatar.purple {
+            background: linear-gradient(135deg, #9061e8, #c19aff);
+        }
+
+        .identity {
+            min-width: 0;
+        }
+
+        .identity h3 {
+            margin: 0 0 5px;
+            font-size: 16px;
+            overflow-wrap: anywhere;
+        }
+
+        .identity p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #168b68;
+            background: #e8faf3;
+            border-radius: 20px;
+            padding: 6px 9px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 13px;
+            align-self: flex-start;
+        }
+
+        .status::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22b783;
+        }
+
+        .partner-description {
+            color: #737c96;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 0 0 17px;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 18px;
+        }
+
+        .tag {
+            display: inline-block;
+            border-radius: 7px;
+            padding: 7px 9px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #5549d6;
+            background: #f0efff;
+        }
+
+        .tag.method {
+            color: #2673b9;
+            background: #eaf5ff;
+        }
+
+        .invite-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px 15px;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 800;
+            transition: 0.2s;
+        }
+
+        .invite-button:hover {
+            filter: brightness(0.95);
+            box-shadow: 0 5px 13px rgba(99, 91, 255, 0.2);
+        }
+
+        .empty-state {
+            padding: 50px 20px;
+            text-align: center;
+            background: white;
+            border: 1px dashed #d8dcef;
+            border-radius: 18px;
+        }
+
+        .empty-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 10px;
+        }
+
+        .empty-state p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #202747;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        .footer strong {
+            color: #b8b2ff;
+        }
+
+        .footer p {
+            margin: 8px 0 0;
+            color: #c3c9dd;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .filter-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .partner-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            .nav-inner {
+                padding: 15px 0;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                width: 100%;
+                gap: 17px;
+                flex-wrap: wrap;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 50px 18px 70px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .main-container {
+                width: 92%;
+            }
+
+            .filter-panel {
+                padding: 17px;
+            }
+
+            .filter-grid,
+            .partner-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-header {
+                align-items: flex-start;
+            }
+
+            .results-header h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="brand">
+                Smart<span>Finder.</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="../index.html">Beranda</a>
+                <a href="cari-partner.html" class="active">Cari Partner</a>
+                <a href="ajakan-belajar.html" class="nav-cta">
+                    Ajak Belajar ↗
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">✦ BELAJAR JADI LEBIH SERU</span>
+            <h1>
+                Temukan Partner Belajar <span>Terbaikmu.</span>
+            </h1>
+            <p>
+                Tidak perlu belajar sendirian. Temukan teman belajar
+                yang memiliki minat sama, bertukar ide, dan berkembang
+                bersama di SmartFinder.
+            </p>
+        </div>
+    </section>
+
+    <main class="main-container">
+
+        <section class="filter-panel">
+            <div class="filter-heading">
+                <div>
+                    <h2>🔎 Cari Partner</h2>
+                    <p>Gunakan pencarian dan filter untuk menemukan teman belajar.</p>
+                </div>
+            </div>
+
+            <div class="filter-grid">
+                <div class="field">
+                    <label for="searchName">Nama Partner</label>
+                    <div class="search-wrap">
+                        <span class="search-icon">⌕</span>
+                        <input
+                            type="search"
+                            id="searchName"
+                            placeholder="Contoh: Alya Putri"
+                            autocomplete="off"
+                        >
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="filterSubject">Mata Pelajaran</label>
+                    <select id="filterSubject">
+                        <option value="">Semua Pelajaran</option>
+                        <option value="Matematika">Matematika</option>
+                        <option value="Bahasa Inggris">Bahasa Inggris</option>
+                        <option value="Biologi">Biologi</option>
+                        <option value="Fisika">Fisika</option>
+                        <option value="Sejarah">Sejarah</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="filterMethod">Metode Belajar</label>
+                    <select id="filterMethod">
+                        <option value="">Semua Metode</option>
+                        <option value="Online">Online</option>
+                        <option value="Offline">Offline</option>
+                    </select>
+                </div>
+
+                <button type="button" class="reset-button" id="resetButton">
+                    ↻ Reset
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <div class="results-header">
+                <div>
+                    <h2>Partner Belajar</h2>
+                    <p>Pilih teman yang cocok dengan gaya belajarmu.</p>
+                </div>
+
+                <span class="result-badge" id="resultCount" aria-live="polite">
+                    6 partner
+                </span>
+            </div>
+
+            <div class="partner-grid" id="partnerList">
+
+                <article class="partner-card"
+                    data-name="Alya Putri"
+                    data-subject="Matematika"
+                    data-method="Online">
+                    <div class="card-top">
+                        <div class="avatar">A</div>
+                        <div class="identity">
+                            <h3>Alya Putri</h3>
+                            <p>Partner belajar</p>
+                        </div>
+                    </div>
+                    <span class="status">Siap belajar</span>
+                    <p class="partner-description">
+                        Suka berdiskusi dan mencari cara mudah untuk
+                        memahami berbagai soal matematika.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Matematika</span>
+                        <span class="tag method">Online</span>
+                    </div>
+                    <a class="invite-button"
+                        href="ajakan-belajar.html?partner=Alya%20Putri">
+                        Ajak Belajar →
+                    </a>
+                </article>
+
+                <article class="partner-card"
+                    data-name="Bima Pratama"
+                    data-subject="Bahasa Inggris"
+                    data-method="Offline">
+                    <div class="card-top">
+                        <div class="avatar blue">B</div>
+                        <div class="identity">
+                            <h3>Bima Pratama</h3>
+                            <p>Partner belajar</p>
+                        </div>
+                    </div>
+                    <span class="status">Siap belajar</span>
+                    <p class="partner-description">
+                        Senang berlatih percakapan, menambah kosakata,
+                        dan belajar bahasa Inggris bersama.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Bahasa Inggris</span>
+                        <span class="tag method">Offline</span>
+                    </div>
+                    <a class="invite-button"
+                        href="ajakan-belajar.html?partner=Bima%20Pratama">
+                        Ajak Belajar →
+                    </a>
+                </article>
+
+                <article class="partner-card"
+                    data-name="Citra Maharani"
+                    data-subject="Biologi"
+                    data-method="Online">
+                    <div class="card-top">
+                        <div class="avatar pink">C</div>
+                        <div class="identity">
+                            <h3>Citra Maharani</h3>
+                            <p>Partner belajar</p>
+                        </div>
+                    </div>
+                    <span class="status">Siap belajar</span>
+                    <p class="partner-description">
+                        Tertarik memahami materi biologi melalui rangkuman,
+                        ilustrasi, dan diskusi.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Biologi</span>
+                        <span class="tag method">Online</span>
+                    </div>
+                    <a class="invite-button"
+                        href="ajakan-belajar.html?partner=Citra%20Maharani">
+                        Ajak Belajar →
+                    </a>
+                </article>
+
+                <article class="partner-card"
+                    data-name="Daffa Ramadhan"
+                    data-subject="Fisika"
+                    data-method="Offline">
+                    <div class="card-top">
+                        <div class="avatar green">D</div>
+                        <div class="identity">
+                            <h3>Daffa Ramadhan</h3>
+                            <p>Partner belajar</p>
+                        </div>
+                    </div>
+                    <span class="status">Siap belajar</span>
+                    <p class="partner-description">
+                        Senang membahas rumus, memahami konsep,
+                        dan menyelesaikan latihan soal fisika.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Fisika</span>
+                        <span class="tag method">Offline</span>
+                    </div>
+                    <a class="invite-button"
+                        href="ajakan-belajar.html?partner=Daffa%20Ramadhan">
+                        Ajak Belajar →
+                    </a>
+                </article>
+
+                <article class="partner-card"
+                    data-name="Eka Safitri"
+                    data-subject="Sejarah"
+                    data-method="Online">
+                    <div class="card-top">
+                        <div class="avatar orange">E</div>
+                        <div class="identity">
+                            <h3>Eka Safitri</h3>
+                            <p>Partner belajar</p>
+                        </div>
+                    </div>
+                    <span class="status">Siap belajar</span>
+                    <p class="partner-description">
+                        Suka membuat rangkuman dan mendiskusikan
+                        peristiwa penting dalam sejarah.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Sejarah</span>
+                        <span class="tag method">Online</span>
+                    </div>
+                    <a class="invite-button"
+                        href="ajakan-belajar.html?partner=Eka%20Safitri">
+                        Ajak Belajar →
+                    </a>
+                </article>
+
+                <article class="partner-card"
+                    data-name="Farhan Akbar"
+                    data-subject="Matematika"
+                    data-method="Offline">
+                    <div class="card-top">
+                        <div class="avatar purple">F</div>
+                        <div class="identity">
+                            <h3>Farhan Akbar</h3>
+                            <p>Partner belajar</p>
+                        </div>
+                    </div>
+                    <span class="status">Siap belajar</span>
+                    <p class="partner-description">
+                        Senang belajar matematika dengan latihan soal
+                        dan berdiskusi untuk mencari solusi.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Matematika</span>
+                        <span class="tag method">Offline</span>
+                    </div>
+                    <a class="invite-button"
+                        href="ajakan-belajar.html?partner=Farhan%20Akbar">
+                        Ajak Belajar →
+                    </a>
+                </article>
+
+            </div>
+
+            <div class="empty-state" id="emptyMessage" hidden>
+                <div class="empty-icon">🔍</div>
+                <h3>Partner belum ditemukan</h3>
+                <p>
+                    Coba gunakan nama lain atau ubah filter mata pelajaran
+                    dan metode belajar.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <strong>SmartFinder.</strong>
+        <p>Temukan teman, berbagi ilmu, berkembang bersama.</p>
+        <p>© 2026 SmartFinder</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("searchName");
+            const subjectFilter = document.getElementById("filterSubject");
+            const methodFilter = document.getElementById("filterMethod");
+            const resetButton = document.getElementById("resetButton");
+            const resultCount = document.getElementById("resultCount");
+            const emptyMessage = document.getElementById("emptyMessage");
+            const cards = Array.from(
+                document.querySelectorAll(".partner-card")
+            );
+
+            function filterPartners() {
+                const keyword = searchInput.value.trim().toLowerCase();
+                const subject = subjectFilter.value.toLowerCase();
+                const method = methodFilter.value.toLowerCase();
+
+                let visibleCount = 0;
+
+                cards.forEach(function (card) {
+                    const name = card.dataset.name.toLowerCase();
+                    const cardSubject = card.dataset.subject.toLowerCase();
+                    const cardMethod = card.dataset.method.toLowerCase();
+
+                    const matchesName = name.includes(keyword);
+                    const matchesSubject =
+                        subject === "" || cardSubject === subject;
+                    const matchesMethod =
+                        method === "" || cardMethod === method;
+
+                    const showCard =
+                        matchesName && matchesSubject && matchesMethod;
+
+                    card.hidden = !showCard;
+
+                    if (showCard) {
+                        visibleCount++;
+                    }
+                });
+
+                resultCount.textContent =
+                    visibleCount + " dari " + cards.length + " partner";
+
+                emptyMessage.hidden = visibleCount !== 0;
+            }
+
+            function resetFilters() {
+                searchInput.value = "";
+                subjectFilter.value = "";
+                methodFilter.value = "";
+                filterPartners();
+                searchInput.focus();
+            }
+
+            searchInput.addEventListener("input", filterPartners);
+            subjectFilter.addEventListener("change", filterPartners);
+            methodFilter.addEventListener("change", filterPartners);
+            resetButton.addEventListener("click", resetFilters);
+
+            filterPartners();
+        });
+    </script>
+
+<script src="../js/partner.js"></script>
+</body>
+</html>

@@ -1,0 +1,899 @@
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartFinder — Belajar Bersama, Tumbuh Bersama</title>
+
+    <meta name="description"
+          content="Temukan partner belajar yang cocok dengan minat, mata pelajaran, dan jadwalmu melalui SmartFinder.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS utama SmartFinder -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Styling tambahan khusus halaman utama -->
+    <style>
+        :root {
+            --sf-primary: #635bff;
+            --sf-dark: #24245c;
+            --sf-text: #252746;
+            --sf-muted: #747895;
+            --sf-light: #f7f8fc;
+            --sf-border: #e8eaf3;
+            --sf-white: #ffffff;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--sf-white);
+            color: var(--sf-text);
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .navbar {
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid var(--sf-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--sf-dark);
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--sf-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--sf-muted);
+            font-size: 13px;
+            font-weight: 600;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--sf-primary);
+        }
+
+        .nav-cta {
+            background: var(--sf-primary);
+            color: white !important;
+            padding: 12px 18px;
+            border-radius: 10px;
+        }
+
+        .hero {
+            padding: 76px 7% 66px;
+            background:
+                radial-gradient(circle at 90% 10%, #e7e5ff 0, transparent 29%),
+                linear-gradient(135deg, #f8f8ff 0%, #ffffff 58%, #f1f0ff 100%);
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 48px;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            background: #eeecff;
+            color: #5148d8;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .hero-label span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #635bff;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 4.5vw, 58px);
+            line-height: 1.15;
+            letter-spacing: -2.5px;
+            margin: 0 0 22px;
+            color: var(--sf-dark);
+        }
+
+        .hero h1 .highlight {
+            color: var(--sf-primary);
+        }
+
+        .hero-description {
+            color: var(--sf-muted);
+            font-size: 15px;
+            line-height: 1.9;
+            max-width: 520px;
+            margin-bottom: 30px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            padding: 14px 21px;
+            border-radius: 11px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            color: white;
+            background: var(--sf-primary);
+            box-shadow: 0 8px 20px rgba(99, 91, 255, .2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--sf-dark);
+            border: 1px solid var(--sf-border);
+        }
+
+        .hero-note {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 26px;
+            color: var(--sf-muted);
+            font-size: 12px;
+        }
+
+        .hero-note strong {
+            color: var(--sf-text);
+        }
+
+        .hero-visual {
+            position: relative;
+            background: linear-gradient(145deg, #292665, #625bdf);
+            padding: 26px;
+            border-radius: 26px;
+            min-height: 310px;
+            box-shadow: 0 24px 60px rgba(54, 48, 139, .19);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .visual-heading {
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .visual-heading small {
+            color: #cbcaff;
+            font-size: 11px;
+        }
+
+        .visual-heading h2 {
+            font-size: 23px;
+            margin: 8px 0 0;
+        }
+
+        .mini-profile {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.15);
+            padding: 14px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .avatar {
+            width: 43px;
+            height: 43px;
+            flex-shrink: 0;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: #38317d;
+            background: #e5e2ff;
+        }
+
+        .avatar.pink {
+            color: #883e72;
+            background: #ffe0f0;
+        }
+
+        .avatar.green {
+            color: #216b53;
+            background: #d5f8e9;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .profile-info small {
+            color: #d6d4ff;
+            font-size: 10px;
+        }
+
+        .profile-status {
+            background: #d7ffe9;
+            color: #16764c;
+            padding: 6px 8px;
+            border-radius: 7px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .visual-footer {
+            color: #d9d7ff;
+            font-size: 11px;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .benefits {
+            padding: 28px 7%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            background: white;
+            border-bottom: 1px solid var(--sf-border);
+        }
+
+        .benefit {
+            display: flex;
+            gap: 13px;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .benefit-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 13px;
+            background: #efedff;
+            color: var(--sf-primary);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .benefit h3 {
+            font-size: 13px;
+            margin: 0 0 5px;
+        }
+
+        .benefit p {
+            color: var(--sf-muted);
+            font-size: 11px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .section {
+            padding: 76px 7%;
+        }
+
+        .section-soft {
+            background: var(--sf-light);
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 590px;
+            margin: 0 auto 40px;
+        }
+
+        .section-eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sf-primary);
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(26px, 3vw, 36px);
+            letter-spacing: -1.2px;
+            margin: 12px 0;
+            color: var(--sf-dark);
+        }
+
+        .section-heading p {
+            color: var(--sf-muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 28px;
+            border: 1px solid var(--sf-border);
+            border-radius: 19px;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(36, 36, 92, .07);
+        }
+
+        .feature-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 15px;
+            background: #eeecff;
+            color: var(--sf-primary);
+            font-size: 22px;
+            margin-bottom: 22px;
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: #e0f8ed;
+            color: #16875e;
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: #fff0df;
+            color: #c47725;
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+            margin: 0 0 11px;
+        }
+
+        .feature-card p {
+            color: var(--sf-muted);
+            font-size: 12px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: var(--sf-dark);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .step-card h3 {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: var(--sf-muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .cta-section {
+            margin: 20px 7% 70px;
+            padding: 48px 24px;
+            text-align: center;
+            border-radius: 24px;
+            color: white;
+            background: linear-gradient(120deg, #292665, #625bdf);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(25px, 3vw, 34px);
+            margin: 0 0 13px;
+            letter-spacing: -1px;
+        }
+
+        .cta-section p {
+            color: #dcdafe;
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 510px;
+            margin: 0 auto 25px;
+        }
+
+        .cta-section .btn {
+            background: white;
+            color: var(--sf-dark);
+        }
+
+        .footer {
+            padding: 28px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: #fafaff;
+            border-top: 1px solid var(--sf-border);
+        }
+
+        .footer p {
+            color: var(--sf-muted);
+            font-size: 11px;
+            margin: 0;
+        }
+
+        .footer strong {
+            color: var(--sf-dark);
+        }
+
+        @media (max-width: 850px) {
+            .navbar {
+                padding: 17px 5%;
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                gap: 17px;
+            }
+
+            .hero {
+                padding: 55px 5%;
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .hero-visual {
+                max-width: 500px;
+                width: auto;
+            }
+
+            .benefits {
+                padding: 25px 5%;
+            }
+
+            .section {
+                padding: 60px 5%;
+            }
+
+            .feature-grid,
+            .steps-grid {
+                gap: 14px;
+            }
+
+            .feature-card {
+                padding: 22px;
+            }
+
+            .cta-section {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .logo {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px 18px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .nav-cta {
+                padding: 9px 11px;
+            }
+
+            .hero {
+                padding-top: 42px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .hero-visual {
+                padding: 19px;
+                min-height: auto;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .feature-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 48px 5%;
+            }
+
+            .section-heading {
+                margin-bottom: 28px;
+            }
+
+            .cta-section {
+                padding: 36px 20px;
+                margin-bottom: 45px;
+            }
+
+            .footer {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            Smart<span>Finder.</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navigasi utama">
+            <a href="index.html" class="active">Beranda</a>
+            <a href="pages/cari-partner.html">Cari Partner</a>
+            <a href="pages/ajakan-belajar.html">Ajakan Belajar</a>
+            <a href="pages/cari-partner.html" class="nav-cta">
+                Mulai Belajar →
+            </a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+
+                <div class="hero-label">
+                    <span></span>
+                    TEMAN BELAJAR, TUJUAN BERSAMA
+                </div>
+
+                <h1>
+                    Belajar Lebih Seru,
+                    Bersama <span class="highlight">Partner yang Tepat.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Setiap perjalanan belajar akan terasa lebih menyenangkan
+                    saat dijalani bersama. Temukan partner yang memiliki
+                    minat dan tujuan belajar yang sesuai denganmu.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="pages/cari-partner.html"
+                       class="btn btn-primary">
+                        Temukan Partner <span>→</span>
+                    </a>
+
+                    <a href="pages/ajakan-belajar.html"
+                       class="btn btn-secondary">
+                        Buat Ajakan Belajar
+                    </a>
+                </div>
+
+                <div class="hero-note">
+                    <span>✦</span>
+                    <span>Mulai dari satu langkah kecil untuk <strong>belajar lebih baik.</strong></span>
+                </div>
+
+            </div>
+
+            <!-- Ilustrasi kartu partner tanpa gambar eksternal -->
+            <div class="hero-visual">
+
+                <div class="visual-heading">
+                    <small>SMARTFINDER / PARTNER BELAJAR</small>
+                    <h2>Teman belajar pilihanmu ✨</h2>
+                </div>
+
+                <div class="mini-profile">
+                    <div class="avatar">AP</div>
+
+                    <div class="profile-info">
+                        <strong>Andi Pratama</strong>
+                        <small>Matematika · Online</small>
+                    </div>
+
+                    <span class="profile-status">Partner</span>
+                </div>
+
+                <div class="mini-profile">
+                    <div class="avatar pink">SR</div>
+
+                    <div class="profile-info">
+                        <strong>Siti Rahma</strong>
+                        <small>Bahasa Inggris · Offline</small>
+                    </div>
+
+                    <span class="profile-status">Partner</span>
+                </div>
+
+                <div class="mini-profile">
+                    <div class="avatar green">BS</div>
+
+                    <div class="profile-info">
+                        <strong>Budi Santoso</strong>
+                        <small>Fisika · Online</small>
+                    </div>
+
+                    <span class="profile-status">Partner</span>
+                </div>
+
+                <div class="visual-footer">
+                    Temukan teman untuk tumbuh dan belajar bersama.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- KEUNGGULAN -->
+        <section class="benefits" aria-label="Keunggulan SmartFinder">
+
+            <div class="benefit">
+                <div class="benefit-icon">⌕</div>
+                <div>
+                    <h3>Pencarian Praktis</h3>
+                    <p>Temukan partner berdasarkan kebutuhan belajar.</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div class="benefit-icon">◷</div>
+                <div>
+                    <h3>Jadwal Fleksibel</h3>
+                    <p>Rencanakan sesi belajar sesuai waktu yang cocok.</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div class="benefit-icon">♧</div>
+                <div>
+                    <h3>Belajar Kolaboratif</h3>
+                    <p>Saling bertukar ide dan pemahaman materi.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FITUR UTAMA -->
+        <section class="section section-soft">
+            <div class="section-heading">
+                <span class="section-eyebrow">Fitur utama</span>
+
+                <h2>Semua yang Kamu Butuhkan untuk Belajar Bersama</h2>
+
+                <p>
+                    SmartFinder membantumu memulai pengalaman belajar
+                    kolaboratif dengan cara yang sederhana dan terarah.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <article class="feature-card">
+                    <div class="feature-icon">⌕</div>
+
+                    <h3>Cari Partner Belajar</h3>
+
+                    <p>
+                        Cari dan saring partner berdasarkan nama,
+                        mata pelajaran, serta metode belajar yang tersedia.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">◎</div>
+
+                    <h3>Kenali Minat Belajar</h3>
+
+                    <p>
+                        Lihat informasi partner untuk menemukan
+                        teman belajar dengan minat yang sejalan.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">✉</div>
+
+                    <h3>Kirim Ajakan Belajar</h3>
+
+                    <p>
+                        Isi formulir ajakan dengan materi, waktu,
+                        dan metode belajar yang direncanakan.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- CARA KERJA -->
+        <section class="section">
+            <div class="section-heading">
+                <span class="section-eyebrow">Cara kerja</span>
+
+                <h2>Tiga Langkah Memulai Perjalananmu</h2>
+
+                <p>
+                    Tidak perlu bingung. Ikuti langkah berikut
+                    untuk mulai mencari partner belajar.
+                </p>
+            </div>
+
+            <div class="steps-grid">
+
+                <article class="step-card">
+                    <div class="step-number">01</div>
+
+                    <h3>Temukan</h3>
+
+                    <p>
+                        Buka halaman pencarian dan gunakan filter
+                        untuk menemukan partner yang sesuai.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <div class="step-number">02</div>
+
+                    <h3>Pilih Partner</h3>
+
+                    <p>
+                        Periksa mata pelajaran dan metode belajar
+                        partner yang ingin kamu ajak.
+                    </p>
+                </article>
+
+                <article class="step-card">
+                    <div class="step-number">03</div>
+
+                    <h3>Mulai Berkolaborasi</h3>
+
+                    <p>
+                        Isi formulir ajakan belajar untuk
+                        merencanakan kegiatan belajar bersama.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2>Belajar Lebih Baik Dimulai Bersama.</h2>
+
+            <p>
+                Temukan partner yang cocok, susun rencana belajar,
+                dan bangun kebiasaan belajar yang lebih kolaboratif.
+            </p>
+
+            <a href="pages/cari-partner.html" class="btn">
+                Cari Partner Sekarang →
+            </a>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>
+            © 2026 <strong>SmartFinder.</strong>
+            Belajar bersama, tumbuh bersama.
+        </p>
+
+        <p>
+            <a href="pages/cari-partner.html">Cari Partner</a>
+            &nbsp; · &nbsp;
+            <a href="pages/ajakan-belajar.html">Ajakan Belajar</a>
+        </p>
+    </footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
